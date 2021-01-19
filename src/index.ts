@@ -1,21 +1,38 @@
 import './style.scss';
 
-class User {
-    name: string = '';
-    email: string = '';
-    age: number = 18;
+class Vehicle {
+    name: string;
+
+    // @var {string} type - can be water, ground, air
+    type: string;
 
     constructor(name: string) {
         this.name = name;
     }
 
-    hello(): string {
-        return `Szia, a nevem ${this.name}`;
+    move(from: number, to: number): string {
+        return `This vehicle is moving from ${from} to ${to}.`;
     }
 }
 
-const user1 = new User('Pisti');
-const user2 = new User('Sanyi');
-const user3 = new User('Enikő');
+class GroundVehicle extends Vehicle {
+    type: string = 'ground';
+    wheels: number = 0;
 
-console.log(user3.age, user3.name);
+    constructor(name: string, wheels: number) {
+        super(name);
+        this.wheels = wheels;
+    }
+}
+
+class Lorry extends GroundVehicle {
+    capacity: number = 0;
+
+    constructor(name: string, wheels: number, capacity: number) {
+        super(name, wheels);
+        this.capacity = capacity;
+    }
+}
+
+const volvoTruck = new Lorry('GlobeTrotter', 12, 24000);
+console.log(volvoTruck.move(2, 44));
